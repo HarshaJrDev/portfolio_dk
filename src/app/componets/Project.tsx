@@ -22,7 +22,7 @@ const projects = [
   },
 ];
 
-const cardVariants = {
+const cardVariants:any = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({
     opacity: 1,
@@ -35,7 +35,7 @@ const cardVariants = {
   }),
 };
 
-const imageVariants = {
+const imageVariants:any = {
   hidden: { scale: 0, opacity: 0 },
   visible: {
     scale: 1,

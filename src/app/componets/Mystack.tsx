@@ -1,6 +1,6 @@
 // components/MyStack.tsx
 import { BsAndroid2 } from "react-icons/bs";
-import { FaAppStore, FaGithub, FaNodeJs, FaReact } from "react-icons/fa";
+import { FaReact } from "react-icons/fa";
 import { IoLogoJavascript } from "react-icons/io";
 import { IoLogoFirebase } from "react-icons/io5";
 import { RiNextjsFill, RiTailwindCssFill } from "react-icons/ri";
