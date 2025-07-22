@@ -20,7 +20,7 @@ const HeroSection = () => {
         {/* Left: Name and Role */}
         <section className="flex flex-col text-center md:text-left space-y-6 max-w-xl">
           <h1 className="text-3xl md:text-6xl font-serif font-bold">
-            Hello, I'm Koti
+            {"Hello, I'm Koti"}
           </h1>
 
           <div className='flex flex-row gap-4 items-center rounded-2xl'>
