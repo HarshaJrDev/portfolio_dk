@@ -7,7 +7,7 @@ import Navbar from './componets/Navbar';
 import HeroSection from './componets/HeroSection';
 
 export default function Home() {
-  // ✅ Using `any` for refs to completely bypass type checking
+
   const homeRef = useRef<any>(null);
 
   const projectsRef = useRef<any>(null);
