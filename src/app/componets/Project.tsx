@@ -1,8 +1,12 @@
 'use client';
 
-import { motion } from 'framer-motion';
+
 import { Card, CardContent } from '@/components/ui/card';
 import Image from 'next/image';
+import React, { forwardRef } from 'react';
+import { motion } from "framer-motion";
+import { BriefcaseBusiness } from "lucide-react";
+
 
 const projects = [
   {
@@ -22,7 +26,7 @@ const projects = [
   },
 ];
 
-const cardVariants:any = {
+const cardVariants: any = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({
     opacity: 1,
@@ -35,7 +39,7 @@ const cardVariants:any = {
   }),
 };
 
-const imageVariants:any = {
+const imageVariants: any = {
   hidden: { scale: 0, opacity: 0 },
   visible: {
     scale: 1,
@@ -49,10 +53,24 @@ const imageVariants:any = {
   },
 };
 
-export default function Projects() {
+const Projects = forwardRef<HTMLElement>((props, ref) => {
   return (
-    <div className="p-8">
-      <h2 className="text-3xl font-bold mb-10 text-white text-center">Projects</h2>
+    <section ref={ref} id="projects" className="p-8">
+      <motion.h2
+        className="text-3xl font-bold mb-10 text-white text-center flex items-center justify-center gap-2"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
+        <motion.span
+          initial={{ scale: 0, rotate: -45 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ type: "spring", stiffness: 200, damping: 10, delay: 0.2 }}
+        >
+          <BriefcaseBusiness className="w-8 h-8 text-white" />
+        </motion.span>
+        Projects
+      </motion.h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {projects.map((project, i) => (
           <motion.div
@@ -64,21 +82,20 @@ export default function Projects() {
             variants={cardVariants}
             className="group"
           >
-            <Card className="bg-[#1F1F1F] px-6  hover:scale-[1.03] transition-transform shadow-lg border border-white/15 flex flex-col items-center  text-center rounded-2xl">
-              
+            <Card className="bg-[#1F1F1F] px-6 hover:scale-[1.03] transition-transform shadow-lg border border-white/15 flex flex-col items-center text-center rounded-2xl">
               {/* Smaller Circular Image */}
               <motion.div
                 variants={imageVariants}
                 initial="hidden"
                 whileInView="visible"
-                className="w-10 h-10 rounded-full overflow-hidden  border border-white/10 shadow-sm"
+                className="w-10 h-10 rounded-full overflow-hidden border border-white/10 shadow-sm"
               >
                 <Image
                   src={project.image}
                   alt={project.title}
                   width={48}
                   height={48}
-                  className="object-cover w-full h-full "
+                  className="object-cover w-full h-full"
                 />
               </motion.div>
 
@@ -90,6 +107,10 @@ export default function Projects() {
           </motion.div>
         ))}
       </div>
-    </div>
+    </section>
   );
-}
+});
+
+Projects.displayName = 'Projects'; // ✅ needed for forwardRef in Next.js
+
+export default Projects;

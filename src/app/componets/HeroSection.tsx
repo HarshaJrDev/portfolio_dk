@@ -2,34 +2,38 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import React from 'react';
 import { TiVendorAndroid } from 'react-icons/ti';
 import { IoIosAppstore } from 'react-icons/io';
+import React, { forwardRef } from "react";
 
 const techStack = [
   { icon: <TiVendorAndroid />, color: "text-green-400" },
   { icon: <IoIosAppstore />, color: "text-green-500" },
 ];
 
-const HeroSection = () => {
+const HeroSection = forwardRef<HTMLElement>((props, ref) => {
   return (
-    <div id="home" className="flex flex-col items-center mt-24 w-full max-w-5xl mx-auto px-2 scroll-mt-24">
-    <div className="flex flex-col-reverse md:flex-row items-center justify-center w-full gap-10 md:gap-24">
+    <section
+      ref={ref}
+      id="home"
+      {...props}
+      className="mt-10 flex flex-col items-center w-full max-w-5xl mx-auto px-2 pt-32 scroll-mt-32"
+    >
 
+      <div className="flex flex-col-reverse md:flex-row items-center justify-center w-full gap-10 md:gap-24">
 
-        {/* Left: Name and Role */}
-        <section className="flex flex-col text-center md:text-left space-y-6 max-w-xl">
-          <h1 className="text-3xl md:text-6xl font-serif font-bold">
-            {"Hello, I'm Koti"}
-          </h1>
+        {/* Left: Name, Role, Stack */}
+        <div className="flex flex-col text-center md:text-left space-y-6 max-w-xl">
+          <h1 className="text-3xl md:text-6xl font-serif font-bold">{"Hello,"}</h1>
+          <h1 className="text-3xl md:text-6xl font-serif font-bold">{"I'm Koti Duddu"}</h1>
 
-          <div className='flex flex-row gap-4 items-center rounded-2xl'>
-            <h2 className="text-xl md:text-3xl text-white/80 font-serif">
+          <div className="flex flex-col md:flex-row md:gap-4 items-center rounded-2xl">
+            <h2 className="text-xl md:text-3xl text-white/80 font-serif mb-4 md:mb-0">
               React Native Developer
             </h2>
 
             <motion.div
-              className="flex flex-wrap gap-2 justify-center"
+              className="flex flex-row gap-2 justify-center overflow-x-auto md:flex-wrap"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -38,7 +42,7 @@ const HeroSection = () => {
               {techStack.map((tech, i) => (
                 <motion.div
                   key={i}
-                  className={`text-5xl md:text-5xl ${tech.color} shadow-lg backdrop-blur-md`}
+                  className={`text-5xl ${tech.color} shadow-lg backdrop-blur-md`}
                   whileHover={{ scale: 1.2 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
@@ -47,10 +51,11 @@ const HeroSection = () => {
               ))}
             </motion.div>
           </div>
-        </section>
 
-        {/* Right: Spinning Globe Image */}
-        <div className="relative w-32 h-32 md:w-32 md:h-32 border-0 border-white/20 shadow-lg rounded-full">
+        </div>
+
+        {/* Right: Spinning Globe with Profile */}
+        <div className="relative  w-50 h-50 rounded-full flex items-center justify-center ">
           <svg
             viewBox="0 0 100 100"
             className="absolute w-full h-full animate-[spin_7s_linear_infinite]"
@@ -63,33 +68,33 @@ const HeroSection = () => {
               />
             </defs>
 
-            <text fontSize="9" fill="#aaa">
+            <text fontSize="10" fill="rgba(255,255,255,0.8)">
               <textPath href="#circlePath" startOffset="0%">
-                AVAILABLE FOR WORK •
+                AVAILABLE FOR WORK  •
               </textPath>
             </text>
 
-            <text fontSize="9" fill="#aaa" transform="rotate(180,50,50)">
+            <text fontSize="10" fill="rgba(255,255,255,0.8)" transform="rotate(180,50,50)">
               <textPath href="#circlePath" startOffset="0%">
-                AVAILABLE FOR WORK •
+                AVAILABLE FOR WORK  •
               </textPath>
             </text>
           </svg>
 
-          <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden shadow-md absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black">
+          <div className="w-[130px] h-[130px] rounded-full overflow-hidden shadow-md bg-black">
             <Image
-              src="/propic.jpeg"
-              alt="Available for Work Globe"
-              width={100}
-              height={100}
+              src="/pp.jpeg"
+              alt="Koti Duddu Profile"
+              width={130}
+              height={130}
               className="object-cover w-full h-full"
             />
           </div>
         </div>
-
       </div>
-    </div>
+    </section>
   );
-};
+});
 
+HeroSection.displayName = "HeroSection";
 export default HeroSection;
