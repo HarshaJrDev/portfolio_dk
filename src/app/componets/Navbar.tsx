@@ -2,10 +2,27 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react';
 
-const Navbar = () => {
+interface NavbarProps {
+  homeRef: React.RefObject<HTMLElement>;
+  stackRef: React.RefObject<HTMLElement>;
+  projectsRef: React.RefObject<HTMLElement>;
+  connectRef: React.RefObject<HTMLElement>;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ homeRef, stackRef, projectsRef, connectRef }) => {
+  const handleScroll = (ref: React.RefObject<HTMLElement>) => {
+    if (ref.current) {
+      const navbarHeight = 80; // approximate height of your navbar in px
+      const elementTop = ref.current.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: elementTop - navbarHeight, // offset by navbar height
+        behavior: 'smooth',
+      });
+    }
+  };
+
   return (
     <motion.nav
       initial={{ opacity: 0, y: -20 }}
@@ -13,11 +30,20 @@ const Navbar = () => {
       transition={{ duration: 0.8, ease: 'easeOut' }}
       className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 w-full px-6 md:px-16"
     >
-      <div className="max-w-sm mx-auto backdrop-blur-md bg-white/5 border border-white/10 px-8 md:px-10 py-2 rounded-2xl flex items-center justify-between text-white shadow-md">
+      <div className="max-w-2xl mx-auto backdrop-blur-md bg-white/5 border border-white/10 px-8 md:px-10 py-2 rounded-2xl flex items-center justify-between text-white shadow-md">
+
+        {/* Left side nav */}
         <div className="flex gap-6 md:gap-8 text-base md:text-lg font-medium">
-          <Link href="#home" className="hover:opacity-70 transition">Home</Link>
+          <button
+            onClick={() => handleScroll(homeRef)}
+            className="hover:opacity-70 transition"
+          >
+            Home
+          </button>
+
         </div>
 
+        {/* Center Logo */}
         <motion.div
           whileHover={{
             rotate: 360,
@@ -38,8 +64,15 @@ const Navbar = () => {
           />
         </motion.div>
 
+        {/* Right side nav */}
         <div className="flex gap-6 md:gap-8 text-base md:text-lg font-medium">
-          <Link href="#projects" className="hover:opacity-70 transition">Projects</Link>
+          <button
+            onClick={() => handleScroll(projectsRef)}
+            className="hover:opacity-70 transition"
+          >
+            Projects
+          </button>
+
         </div>
       </div>
     </motion.nav>
